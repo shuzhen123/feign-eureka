@@ -1,0 +1,43 @@
+spring:
+  datasource:
+    name: crystalball
+    url: jdbc:mysql://shulianinfo-out.mysql.huhehaote.rds.aliyuncs.com:3306/crystal?characterEncoding=utf8
+    username: shulian
+    password: Aa123456
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+  application:
+    name: cry-service
+  session:
+    store-type: none
+server:
+  port: 8888
+mybatis:
+  mapper-locations: classpath:com.shulian.slt.crystalball.dao/*.xml
+  type-aliases-package: com.shulian.slt.crystalball.entity
+feign:
+  hystrix:
+    enabled: false
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 192.168.2.111
+  client:
+    serviceUrl:
+      defaultZone: http://center-test.shulianinfo.com:8000/eureka/
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+  feign:
+    hystrix:
+      enabled: false
+    command:
+      default:
+        execution:
+          isolation:
+            thread:
+              timeoutInMilliseconds: 5000
+          timeout:
+            enabled: false
